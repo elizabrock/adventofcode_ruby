@@ -57,4 +57,30 @@ describe Day1 do
       actual.must_equal expected
     end
   end
+
+  describe "first_enters_basement_at" do
+    it "scenario 1" do
+      expected = 1
+      actual = Day1.new(")").first_enters_basement_at()
+      actual.must_equal expected
+    end
+
+    it "scenario 2" do
+      expected = 3
+      actual = Day1.new("())").first_enters_basement_at()
+      actual.must_equal expected
+    end
+
+    it "scenario 3" do
+      expected = 5
+      actual = Day1.new("()())").first_enters_basement_at()
+      actual.must_equal expected
+    end
+
+    it "scenario 4" do
+      expected = -1
+      actual = Day1.new("()()").first_enters_basement_at()
+      actual.must_equal expected
+    end
+  end
 end

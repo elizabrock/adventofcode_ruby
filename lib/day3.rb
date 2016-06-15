@@ -1,15 +1,35 @@
 class Day3
   def self.run
     directions = File.open('input/day3_input.txt', 'r').read()
-    santa = Santa.new()
-    directions.each_char do |direction|
-      santa.travel(direction)
+    router = Router.new(Santa.new)
+    router.route(directions)
+    puts "  Santa will visit #{router.total_houses_visited} houses."
+    router = Router.new(Santa.new, Santa.new)
+    router.route(directions)
+    puts "  Santa and Robo-Santa combined will visit #{router.total_houses_visited} houses."
+  end
+
+  class Router
+    def initialize(*travelers)
+      @travelers = travelers
     end
-    puts "  Santa will visit #{santa.total_houses_visited} houses."
+
+    def route(directions)
+      iterator = @travelers.cycle.each
+      directions.each_char do |direction|
+        current_traveler = iterator.next
+        current_traveler.travel(direction)
+      end
+    end
+
+    def total_houses_visited
+      locations_visited = @travelers.inject([]){ |memo, t| memo.push(*t.locations_visited) }
+      locations_visited.uniq.count
+    end
   end
 
   class Santa
-    attr_reader :current_location
+    attr_reader :current_location, :locations_visited
 
     def initialize
       @locations_visited = [ ]
@@ -20,10 +40,6 @@ class Day3
 
     def current_location
       [@current_x, @current_y]
-    end
-
-    def total_houses_visited
-      @locations_visited.uniq.count
     end
 
     def travel(direction)

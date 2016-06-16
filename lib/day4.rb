@@ -2,10 +2,11 @@ require 'digest'
 
 class Day4
   def self.run
-    result = Day4.find_hash_salt_for_key('yzbqklnj', leading_zeroes: 5)
-    puts "  The hash salt for part 1 is #{result}"
-    result = Day4.find_hash_salt_for_key('yzbqklnj', leading_zeroes: 6)
-    puts "  The hash salt for part 2 is #{result}"
+    puts "  Uncomment lib/day4.rb:6-9 for results"
+    # result = Day4.find_hash_salt_for_key('yzbqklnj', leading_zeroes: 5)
+    # puts "  The hash salt for part 1 is #{result}"
+    # result = Day4.find_hash_salt_for_key('yzbqklnj', leading_zeroes: 6)
+    # puts "  The hash salt for part 2 is #{result}"
   end
 
   def self.find_hash_salt_for_key(key, leading_zeroes: 5)
